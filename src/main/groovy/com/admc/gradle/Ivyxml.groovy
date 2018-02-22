@@ -182,7 +182,6 @@ Set plugin property 'ivyxml.depFile' to a File object for your ivy xml file.
                                 depArt.ext, null, depArt.url))
                 }
 
-                def excRuleContainer = dep.excludeRules
                 descriptor.excludeRules?.values().each {
                     def ruleList -> ruleList.each {
                         def excludeAttrs = [:]
@@ -199,8 +198,7 @@ Set plugin property 'ivyxml.depFile' to a File object for your ivy xml file.
                                     + "support Ivy attribute '$k'")
                         }
                         assert excludeAttrs.size() > 0
-                        excRuleContainer.add(
-                                new DefaultExcludeRule(excludeAttrs))
+                        dep.exclude(excludeAttrs)
                     }
                 }
                 gradleProjConfMap[mappableConfName].getDependencies().add(dep)
